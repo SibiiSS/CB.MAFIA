@@ -2,6 +2,7 @@ const http = require('http'), fs = require('fs'), path = require('path');
 const { Server } = require('socket.io');
 const PAGE = fs.readFileSync(path.join(__dirname, 'public', 'index.html'));
 const server = http.createServer((req, res) => {
+    if (req.url === '/ads.txt') { res.writeHead(200, { 'Content-Type': 'text/plain' }); res.end('google.com, pub-4787504381562454, DIRECT, f08c47fec0942fa0\n'); return; }
   if (req.url === '/health') { res.end('ok'); return; }
   res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' }); res.end(PAGE);
 });
